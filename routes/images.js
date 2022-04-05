@@ -9,7 +9,6 @@ let imagesCache = [];
 router.get("/", async function (req, res, next) {
   const page = req.query.page;
   const limit = req.query.limit;
-  console.log(page, limit);
 
   if (!imagesCache.length) {
     const res = await axios.get(
@@ -18,10 +17,7 @@ router.get("/", async function (req, res, next) {
     imagesCache = res.data;
   }
 
-  console.log((page - 1) * limit);
-  console.log(page * limit);
   const data = imagesCache.slice((page - 1) * limit, page * limit);
-  console.log(data.length);
 
   res.json(data);
 });
